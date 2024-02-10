@@ -1,0 +1,74 @@
+import random
+
+def diceCall():
+    return random.randint(1,6)
+
+def ladder_position(position):
+    ladder_point={ 3: 26,
+    5: 15,
+    13: 44,
+    25: 51,
+    29: 74,
+    36: 57,
+    42: 72,
+    49: 86,
+    57: 76,
+    61: 93,
+    77: 86,
+    81: 98,
+    88: 91
+    }
+    if position in ladder_point:
+        new_position=ladder_point[position]
+        print(f"Waoo! Ladder at {position}. You go up to {new_position}.")
+        return new_position
+    else:
+        return position
+
+def snake_position(position):
+    snake_point={
+        16: 6,
+        47: 26,
+        49: 11,
+        56: 53,
+        62: 19,
+        64: 60,
+        87: 24,
+        93: 73,
+        95: 75,
+        98: 78
+    }
+    if position in snake_point:
+        new_position=snake_point[position]
+        print(f"Oops! Snake at {position}. You go down to {new_position}.")
+        return new_position
+    else:
+        return position
+
+
+def main():
+
+    start_point=1
+    end_point=100
+    print("Welcome to Snake and Ladder Game!")
+
+    while start_point < end_point:
+        print(f"Your current position is {start_point}.")
+        input("Press Enter to roll the dice...")
+        dice_num=diceCall()
+        print(f"You rolled a {dice_num}.")
+        start_point+=dice_num
+        start_point=snake_position(start_point)
+        start_point=ladder_position(start_point)
+
+        if start_point>end_point:
+            start_point=end_point
+
+
+        if start_point==end_point:
+            print(f"Congratulations! You reached the end. You won!") 
+            break                  
+        
+
+if __name__ == "__main__":
+    main()
